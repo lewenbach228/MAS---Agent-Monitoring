@@ -1,0 +1,36 @@
+services:
+  neo4j:
+    image: neo4j:5-community
+    ports:
+      - "8787:7687"
+      - "8788:7474"
+    environment:
+      NEO4J_AUTH: neo4j/vigie123
+      NEO4J_dbms_memory_pagecache_size: 512M
+    volumes:
+      - neo4j_data:/data
+
+  timescaledb:
+    image: timescale/timescaledb:latest-pg17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: vigie
+      POSTGRES_PASSWORD: vigie123
+      POSTGRES_DB: vigie_metrics
+    volumes:
+      - timescaledb_data:/var/lib/postgresql/data
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # Pull model on startup (first pull takes time)
+    command: serve
+
+volumes:
+  neo4j_data:
+  timescaledb_data:
+  ollama_data:

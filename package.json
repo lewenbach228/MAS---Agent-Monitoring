@@ -1,0 +1,23 @@
+{
+  "name": "p6-vigie",
+  "version": "1.0.0",
+  "description": "P6 — Vigie de Monitoring et Crise Digitale (Model-based reflex agent)",
+  "type": "module",
+  "scripts": {
+    "skeleton": "npx tsx walking-skeleton.ts",
+    "api": "npx tsx src/index.ts",
+    "dashboard": "npm run dev --prefix dashboard",
+    "dev": "npx concurrently -n api,dash -c red,cyan \"npm run api\" \"npm run dashboard\""
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "neo4j-driver": "^6.1.0",
+    "pg": "^8.21.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.2",
+    "@types/pg": "^8.20.0",
+    "concurrently": "^10.0.3"
+  }
+}
